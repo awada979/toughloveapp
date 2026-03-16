@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tough Love — Because nice didn't work.</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --dark: #111111;
+      --card: #181818;
+      --border: #222222;
+      --red: #e02020;
+      --red-dim: #a01515;
+      --white: #f0f0f0;
+      --muted: #888888;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: var(--red); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── HEADER ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--white);
+    }
+
+    .logo span { color: var(--red); }
+
+    nav a {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-left: 1.5rem;
+    }
+
+    nav a:hover { color: var(--white); text-decoration: none; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(224, 32, 32, 0.12);
+      border: 1px solid rgba(224, 32, 32, 0.3);
+      color: var(--red);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 1.75rem;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 span { color: var(--red); }
+
+    .tagline {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+
+    .description {
+      font-size: 1rem;
+      color: #aaaaaa;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 0.75rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+
+    .btn:active { transform: scale(0.97); }
+    .btn:hover { opacity: 0.88; text-decoration: none; }
+
+    .btn-primary {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+    }
+
+    /* ── FEATURES ── */
+    .section {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.5rem;
+    }
+
+    .section h2 {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 2.5rem;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .feature {
+      background: var(--card);
+      padding: 1.5rem;
+    }
+
+    .feature-icon {
+      font-size: 1.4rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: var(--white);
+    }
+
+    .feature p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── DIVIDER ── */
+    hr {
+      border: none;
+      border-top: 1px solid var(--border);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    .contact p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+    }
+
+    .contact a {
+      font-weight: 600;
+    }
+
+    /* ── PRIVACY ── */
+    .privacy {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 5rem;
+    }
+
+    .privacy h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.25rem;
+    }
+
+    .privacy .updated {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+
+    .privacy h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      margin: 1.75rem 0 0.5rem;
+    }
+
+    .privacy p, .privacy li {
+      font-size: 0.9rem;
+      color: #999999;
+      line-height: 1.75;
+    }
+
+    .privacy ul {
+      padding-left: 1.25rem;
+      margin-top: 0.25rem;
+    }
+
+    .privacy li { margin-bottom: 0.25rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    footer a { color: var(--muted); }
+    footer a:hover { color: var(--white); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="logo">Tough<span>Love</span></div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a href="#privacy">Privacy</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="about">
+    <div class="badge">Nicotine Cessation</div>
+    <h1>Quit.<br /><span>For real</span> this time.</h1>
+    <p class="tagline">"Because nice didn't work."</p>
+    <p class="description">
+      Tough Love is a no-nonsense nicotine cessation app that tells you what you need to hear, not what you want to hear. Track your progress, face your habits, and quit — with brutal honesty as your coach.
+    </p>
+    <div class="cta-group">
+      <a class="btn btn-primary" href="#">Download on App Store</a>
+      <a class="btn btn-ghost" href="#contact">Get in touch</a>
+    </div>
+  </section>
+
+  <hr />
+
+  <!-- FEATURES -->
+  <section class="section">
+    <p class="section-label">Features</p>
+    <h2>Everything you need. Nothing you don't.</h2>
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">⏱</div>
+        <h3>Quit Timer</h3>
+        <p>See exactly how long you've been free — down to the second. Every moment counts.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">💰</div>
+        <h3>Money Saved</h3>
+        <p>Watch the dollars stack up in real time. Your habit has a price. So does quitting.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">❤️</div>
+        <h3>Health Milestones</h3>
+        <p>Your body starts recovering within 20 minutes. Track every milestone as it happens.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🏆</div>
+        <h3>Achievements</h3>
+        <p>Earn badges that mean something. No participation trophies — only real progress.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">📓</div>
+        <h3>Craving Journal</h3>
+        <p>Log cravings, identify your triggers, and break the cycle one entry at a time.</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🔥</div>
+        <h3>Tough Love Mode</h3>
+        <p>No coddling. Get the raw, honest feedback that actually makes a difference.</p>
+      </div>
+    </div>
+  </section>
+
+  <hr />
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <p class="section-label">Contact</p>
+    <h2 style="font-size:1.5rem;font-weight:700;letter-spacing:-0.02em;margin-bottom:0.25rem;">Get in touch</h2>
+    <p>Questions, feedback, or support? Reach us at <a href="mailto:hello@toughloveapp.com">hello@toughloveapp.com</a></p>
+  </section>
+
+  <hr />
+
+  <!-- PRIVACY POLICY -->
+  <section class="privacy" id="privacy">
+    <p class="section-label">Legal</p>
+    <h2>Privacy Policy</h2>
+    <p class="updated">Last updated: March 15, 2026</p>
+
+    <p>Tough Love ("we", "our", or "us") is committed to protecting your privacy. This policy explains what information we collect, how we use it, and your rights.</p>
+
+    <h3>Information We Collect</h3>
+    <p>We may collect the following information when you use the app:</p>
+    <ul>
+      <li>Quit date and smoking history you enter manually</li>
+      <li>Craving log entries and journal notes stored on your device</li>
+      <li>Anonymous usage analytics (crash reports, feature usage) to improve the app</li>
+    </ul>
+
+    <h3>How We Use Your Information</h3>
+    <ul>
+      <li>To provide and improve the app's core features</li>
+      <li>To calculate your progress, savings, and health milestones</li>
+      <li>To diagnose technical issues and fix bugs</li>
+    </ul>
+
+    <h3>Data Storage</h3>
+    <p>Your personal quit data (quit date, journal entries, settings) is stored locally on your device and is not transmitted to our servers. We do not sell, rent, or share your personal information with third parties.</p>
+
+    <h3>Analytics</h3>
+    <p>We use anonymized, aggregated analytics to understand how the app is used and to improve the experience. This data cannot be used to identify you personally.</p>
+
+    <h3>Children's Privacy</h3>
+    <p>Tough Love is not intended for users under 13 years of age. We do not knowingly collect personal information from children.</p>
+
+    <h3>Changes to This Policy</h3>
+    <p>We may update this policy from time to time. We will notify you of any significant changes by updating the date at the top of this page.</p>
+
+    <h3>Contact</h3>
+    <p>If you have any questions about this privacy policy, please contact us at <a href="mailto:hello@toughloveapp.com">hello@toughloveapp.com</a>.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Tough Love. All rights reserved. &nbsp;·&nbsp; <a href="#privacy">Privacy Policy</a> &nbsp;·&nbsp; <a href="mailto:hello@toughloveapp.com">hello@toughloveapp.com</a></p>
+  </footer>
+
+</body>
+</html>
